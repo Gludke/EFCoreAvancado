@@ -4,7 +4,7 @@ using Proj.Console.Domain.Models;
 
 namespace Proj.Console.Data
 {
-    public class OutroAplicationContext : DbContext
+    public class OutroApplicationContext : DbContext
     {
         //Gera o log das operações no DB. Necessário o package 'Microsoft.Extensions.Logging.Console'
         //Adiciona o log no console da app

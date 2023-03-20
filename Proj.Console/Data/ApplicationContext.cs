@@ -4,7 +4,7 @@ using Proj.Console.Domain.Models;
 
 namespace Proj.Console.Data
 {
-    public class AplicationContext : DbContext
+    public class ApplicationContext : DbContext
     {
         //Gera o log das operações no DB. Necessário o package 'Microsoft.Extensions.Logging.Console'
         //Adiciona o log no console da app
@@ -15,7 +15,8 @@ namespace Proj.Console.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            const string connectionString = "Server=localhost\\SQLEXPRESS;Database=DbEFCoreAdvanced;Trusted_Connection=True;";
+            //Pooling=True -> permite que o programa reutilize conexões de banco de dados existentes em vez de abrir novas conexões toda vez que uma consulta é executada.
+            const string connectionString = "Server=localhost\\SQLEXPRESS;Database=DbEFCoreAdvanced;Trusted_Connection=True;Pooling=True;";
 
             optionsBuilder
                 .UseSqlServer(connectionString)
