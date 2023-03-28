@@ -11,5 +11,8 @@ namespace Proj.Console.Domain.Models
         public int DepartamentoId { get; set; }
         [JsonIgnore]
         public Departamento Departamento { get; set; }
+
+        //'virtual' serve para que o carregamendo 'LazyLoad' funcione
+        //public virtual Departamento Departamento { get; set; }
     }
 }
