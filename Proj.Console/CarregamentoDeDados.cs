@@ -9,10 +9,13 @@ namespace Proj.Console
 {
     public class CarregamentoDeDados
     {
+        private static JsonHelper JsonHelper => new();
+
 
         //Add dados ao DB
         public static void CriarSetupDb(ApplicationContext db)
         {
+            //Cria o DB se não existir
             if (db.Database.EnsureCreated())
             {
                 if (!db.Departamentos.Any())
@@ -21,6 +24,8 @@ namespace Proj.Console
                         new Departamento
                         {
                             Descricao = "Departamento 01",
+                            Ativo = true,
+                            Excluido = true,
                             Funcionarios = new List<Funcionario>
                             {
                                 new Funcionario
@@ -40,6 +45,8 @@ namespace Proj.Console
                         new Departamento
                         {
                             Descricao = "Departamento 02",
+                            Ativo = true,
+                            Excluido = false,
                             Funcionarios = new List<Funcionario>
                             {
                                 new Funcionario

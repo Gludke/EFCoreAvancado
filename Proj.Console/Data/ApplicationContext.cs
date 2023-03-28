@@ -21,10 +21,11 @@ namespace Proj.Console.Data
             optionsBuilder
                 .UseSqlServer(connectionString)
                 .EnableSensitiveDataLogging()
-                //necessário o package 'Microsoft.EntityFrameworkCore.Proxies'
-                .UseLazyLoadingProxies()
                 //Registra o log das operaçoes do EFCore no nosso logger
                 .UseLoggerFactory(_logger);
+
+                //necessário o package 'Microsoft.EntityFrameworkCore.Proxies'
+                //.UseLazyLoadingProxies()
         }
     }
 }

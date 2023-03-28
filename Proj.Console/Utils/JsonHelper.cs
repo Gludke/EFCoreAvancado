@@ -1,20 +1,21 @@
-﻿using Newtonsoft.Json;
+﻿using Castle.DynamicProxy;
+using Newtonsoft.Json;
 
 namespace Proj.Console.Utils
 {
     public class JsonHelper
     {
+        private JsonSerializerSettings _settings;
 
-        public static string ObjectToJson(object obj)
+        public JsonHelper()
         {
-            var settings = new JsonSerializerSettings
+            _settings = new JsonSerializerSettings
             {
                 ReferenceLoopHandling = ReferenceLoopHandling.Ignore
             };
-
-            return JsonConvert.SerializeObject(obj, settings);
         }
 
+        public string ObjectToJson(object obj) => JsonConvert.SerializeObject(obj, _settings);
 
     }
 }
