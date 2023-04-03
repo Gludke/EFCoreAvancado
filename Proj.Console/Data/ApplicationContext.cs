@@ -27,5 +27,13 @@ namespace Proj.Console.Data
                 //necessário o package 'Microsoft.EntityFrameworkCore.Proxies'
                 //.UseLazyLoadingProxies()
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            //Aplica um filtro global que sempre traz apenas os Departamento que não foram excluídos
+            //modelBuilder.Entity<Departamento>().HasQueryFilter(d => !d.Excluido);
+        }
+
+
     }
 }

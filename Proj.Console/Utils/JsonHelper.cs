@@ -1,5 +1,4 @@
-﻿using Castle.DynamicProxy;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Proj.Console.Utils
 {
