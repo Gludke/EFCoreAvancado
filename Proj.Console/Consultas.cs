@@ -66,5 +66,28 @@ namespace Proj.Console
             }
         }
 
+        /// <summary>
+        /// Solução para o problema da 'explosão cartesiana'. Impede que os mesmos dados sejam duplicados junto da
+        /// duplicação de linhas criadas com os 'joins'. Possível configurar globalmente no context.
+        /// </summary>
+        public static void ConsultaComSplitQuery(ApplicationContext db)
+        {
+            CarregamentoDeDados.CriarSetupDb(db);
+
+            var depsDb = db.Departamentos
+                .Include(d => d.Funcionarios)
+                .AsNoTracking()
+                //quebra a consulta em várias, para diminuir o tráfego de dados
+                .AsSplitQuery()
+                //realiza uma única consulta. É o padrão
+                //.AsSingleQuery()
+                .ToList();
+
+            foreach (var dep in depsDb)
+            {
+                System.Console.WriteLine($"\n{JsonHelper.ObjectToJson(dep)}");
+            }
+        }
+
     }
 }

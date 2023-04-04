@@ -21,15 +21,24 @@ namespace Proj.Console.Data
             optionsBuilder
                 .UseSqlServer(connectionString)
                 .EnableSensitiveDataLogging()
-                //Registra o log das operaçoes do EFCore no nosso logger
                 .UseLoggerFactory(_logger);
 
-                //necessário o package 'Microsoft.EntityFrameworkCore.Proxies'
-                //.UseLazyLoadingProxies()
+            //SplitQuery global no sistema
+            //.UseSqlServer(connectionString, a => a.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery))
+
+            //necessário o package 'Microsoft.EntityFrameworkCore.Proxies'
+            //.UseLazyLoadingProxies()
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //Para SQL Server - Configurando as tabelas do BD para não serem 'Case Sensitive (CI)' e também não
+            //sensíveis a acentos (AI)
+            modelBuilder.UseCollation("SQL_Latin1_General_CP1_CI_AI");
+
+            //Configurando essa coluna específica para ser 'Case Sensitive' (CS) e sensível a acentos (AS)
+            modelBuilder.Entity<Departamento>().Property(d => d.Descricao).UseCollation("SQL_Latin1_General_CP1_CS_AS");
+
             //Aplica um filtro global que sempre traz apenas os Departamento que não foram excluídos
             //modelBuilder.Entity<Departamento>().HasQueryFilter(d => !d.Excluido);
         }
